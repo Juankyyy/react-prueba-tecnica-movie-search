@@ -23,4 +23,35 @@
   font-weight: 700; /* Bold */
   font-display: swap;
 }
+
+/* Config custom variables */
+@theme {
+  
+}
+
+/* Dark mode */
+:root {
+  color-scheme: light dark;
+
+  --bg-primary: #F5F5F5;
+  --text-color-primary: #0d1117;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-primary: #0d1117;
+    --text-color-primary: #F5F5F5;
+  }
+}
+
+[data-theme="dark"] {
+  --bg-primary: #0d1117;
+  --text-color-primary: #F5F5F5;
+}
+
+[data-theme="light"] {
+  --bg-primary: #F5F5F5;
+  --text-color-primary: #0d1117;
+}
+
 }
