@@ -1,2 +1,22 @@
 @import "tailwindcss";
+
+@font-face {
+  font-family: "Chillax";
+  src: url("./assets/fonts/Chillax-Regular.woff2") format("woff2");
+  font-weight: 400; /* Regular */
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Chillax";
+  src: url("./assets/fonts/Chillax-Light.woff2") format("woff2");
+  font-weight: 300; /* Light */
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Chillax";
+  src: url("./assets/fonts/Chillax-Bold.woff2") format("woff2");
+  font-weight: 700; /* Bold */
+  font-display: swap;
 }
