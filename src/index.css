@@ -5,28 +5,31 @@
 /* Config font family */
 @font-face {
   font-family: "Chillax";
-  src: url("../public/fonts/Chillax-Regular.woff2") format("woff2");
+  src: url("/fonts/Chillax-Regular.woff2") format("woff2");
   font-weight: 400; /* Regular */
   font-display: swap;
 }
 
 @font-face {
   font-family: "Chillax";
-  src: url("../public/fonts/Chillax-Light.woff2") format("woff2");
+  src: url("/fonts/Chillax-Light.woff2") format("woff2");
   font-weight: 300; /* Light */
   font-display: swap;
 }
 
 @font-face {
   font-family: "Chillax";
-  src: url("../public/fonts/Chillax-Bold.woff2") format("woff2");
+  src: url("/fonts/Chillax-Bold.woff2") format("woff2");
   font-weight: 700; /* Bold */
   font-display: swap;
 }
 
 /* Config custom variables */
 @theme {
-  
+  --color-bg: var(--bg-primary);
+  --color-text: var(--text-color-primary);
+
+  --color-border: #3d444d;
 }
 
 /* Dark mode */
@@ -60,6 +63,9 @@ html {
 }
 
 body {
+  background-color: var(--bg-primary);
+  color: var(--text-color-primary);
+
   max-width: 1000px;
   padding-top: 30px;
   margin: auto;
