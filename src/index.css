@@ -54,4 +54,13 @@
   --text-color-primary: #0d1117;
 }
 
+html {
+  font-family: "Chillax", sans-serif;
+  line-height: 1.5;
+}
+
+body {
+  max-width: 1000px;
+  padding-top: 30px;
+  margin: auto;
 }
