@@ -1,5 +1,6 @@
 import { SearchIcon } from "lucide-react";
 import { useState } from "react";
+import { getMoviesbySearch } from "../../services/movies";
 
 export const Search = () => {
   const [query, setQuery] = useState("");
@@ -7,14 +8,19 @@ export const Search = () => {
   const onInputChange = (e) => {
     setQuery(e.target.value);
   };
-
+  
   const onSubmit = (e) => {
     e.preventDefault();
     console.log(query);
+    
+    getMoviesbySearch(query);
   };
 
   return (
-    <form onSubmit={onSubmit} className="flex items-center group gap-2 p-2 px-3 h-navbar-items bg-black border-border hover:bg-border hover:border-black border-2 rounded-full transition-colors">
+    <form
+      onSubmit={onSubmit}
+      className="flex items-center group gap-2 p-2 px-3 h-navbar-items bg-black border-border hover:bg-border hover:border-black border-2 rounded-full transition-colors"
+    >
       <input
         className="focus:outline-0 p-2 px-3"
         type="text"
