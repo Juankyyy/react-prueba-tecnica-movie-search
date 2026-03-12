@@ -1,3 +1,4 @@
+import { Movies } from "./components/Movies/Movies.jsx";
 import { Navbar } from "./components/Navbar/Navbar.jsx";
 
 export const App = () => {
@@ -6,7 +7,7 @@ export const App = () => {
   return (
     <>
       <Navbar />
-      <h1>App</h1>
+      <Movies />
     </>
   );
 };
