@@ -1,5 +1,3 @@
-// import { useEffect, useState } from "react";
-// import { getDefaultMovies } from "../../services/movies";
 import { Popcorn, Search, Sparkles } from "lucide-react";
 import useMoviesStore from "../../contexts/useMoviesStore";
 import { Card } from "./Card";

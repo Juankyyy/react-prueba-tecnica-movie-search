@@ -10,6 +10,7 @@ const useMoviesStore = create((set, get) => ({
 
   // acciones
   setQuery: (value) => set({ query: value }),
+  setMovies: (value) => set({ movies: value }),
 
   // funciones
   getMoviesByQuery: async (query) => {

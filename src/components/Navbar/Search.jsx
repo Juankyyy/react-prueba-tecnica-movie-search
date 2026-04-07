@@ -1,20 +1,39 @@
 import { SearchIcon } from "lucide-react";
 import useMoviesStore from "../../contexts/useMoviesStore";
+import { useEffect } from "react";
 
 export const Search = () => {
   const getMoviesByQuery = useMoviesStore((s) => s.getMoviesByQuery);
   const query = useMoviesStore((s) => s.query);
   const setQuery = useMoviesStore((s) => s.setQuery);
+  const setMovies = useMoviesStore((s) => s.setMovies);
 
   const onInputChange = (e) => {
     setQuery(e.target.value);
   };
 
+  useEffect(() => {
+    if (!query.trim()) {
+      setMovies([]);
+      return;
+    }
+
+    const timer = setTimeout(() => {
+      getMoviesByQuery(query.trim());
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, [query]);
+
   const onSubmit = (e) => {
     e.preventDefault();
     console.log(query);
+    if (query.length === 0) {
+      setMovies([]);
 
-    getMoviesByQuery(query.trim());
+    } else {
+      getMoviesByQuery(query);
+    };
   };
 
   return (
