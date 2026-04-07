@@ -4,10 +4,43 @@ import { Card } from "./Card";
 
 export const Movies = () => {
   const movies = useMoviesStore((s) => s.movies);
+  const isLoading = useMoviesStore((s) => s.isLoading);
+  const error = useMoviesStore((s) => s.error);
+  const hasSearched = useMoviesStore((s) => s.hasSearched);
   const query = useMoviesStore((s) => s.query);
   const hasQuery = query.trim().length > 0;
+  const showMovies = movies.length > 0 && hasSearched && !isLoading;
 
-  return movies.length > 0 ? (
+  const getTitle = () => {
+    if (!hasQuery) return "¡Bienvenido a Movie Search!";
+    if (isLoading) return "Escribiendo tu búsqueda...";
+    if (!hasSearched) return "Escribiendo tu búsqueda...";
+    if (error) return "Hubo un problema al buscar";
+
+    return "No encontramos resultados";
+  };
+
+  const getDescription = () => {
+    if (!hasQuery) {
+      return "Busca por título y encuentra películas en segundos. Empieza con una de estas ideas:";
+    }
+
+    if (isLoading) {
+      return "Sigue escribiendo, aún no hemos terminado de buscar.";
+    }
+
+    if (!hasSearched) {
+      return "Sigue escribiendo, aún no hemos terminado de buscar.";
+    }
+
+    if (error) {
+      return error;
+    }
+
+    return `No hay coincidencias para "${query}". Prueba con otro título o una palabra más corta.`;
+  };
+
+  return showMovies ? (
     <section className="flex flex-wrap gap-5">
       {movies.map((movie) => (
         <Card
@@ -30,15 +63,9 @@ export const Movies = () => {
             Descubre tu próxima película favorita
           </div>
 
-          <h2 className="text-3xl font-bold md:text-5xl">
-            {hasQuery ? "No encontramos resultados" : "¡Bienvenido a Movie Search!"}
-          </h2>
+          <h2 className="text-3xl font-bold md:text-5xl">{getTitle()}</h2>
 
-          <p className="themed-muted mt-4 max-w-2xl text-base md:text-lg">
-            {hasQuery
-              ? `No hay coincidencias para "${query}". Prueba con otro título o una palabra más corta.`
-              : "Busca por título y encuentra películas en segundos. Empieza con una de estas ideas:"}
-          </p>
+          <p className="themed-muted mt-4 max-w-2xl text-base md:text-lg">{getDescription()}</p>
 
           <div className="mt-7 flex flex-wrap gap-3 text-sm">
             <span className="themed-empty-chip rounded-full px-4 py-2">Interstellar</span>
