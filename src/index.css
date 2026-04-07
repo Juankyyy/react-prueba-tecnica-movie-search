@@ -41,23 +41,35 @@
   color-scheme: light dark;
 
   --bg-primary: #F5F5F5;
+  --bg-gradient: linear-gradient(180deg, #f7f8fa 0%, #eef1f5 100%);
   --text-color-primary: #0d1117;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --bg-primary: #0d1117;
+    --bg-gradient:
+      radial-gradient(1100px circle at -8% -25%, rgba(77, 124, 184, 0.62), transparent 58%),
+      radial-gradient(820px circle at 102% -5%, rgba(19, 165, 131, 0.44), transparent 52%),
+      radial-gradient(980px circle at 50% 115%, rgba(34, 80, 138, 0.3), transparent 60%),
+      linear-gradient(158deg, #070b11 0%, #0d1117 42%, #13202a 100%);
     --text-color-primary: #F5F5F5;
   }
 }
 
 [data-theme="dark"] {
   --bg-primary: #0d1117;
+  --bg-gradient:
+    radial-gradient(1100px circle at -8% -25%, rgba(77, 124, 184, 0.62), transparent 58%),
+    radial-gradient(820px circle at 102% -5%, rgba(19, 165, 131, 0.44), transparent 52%),
+    radial-gradient(980px circle at 50% 115%, rgba(34, 80, 138, 0.3), transparent 60%),
+    linear-gradient(158deg, #070b11 0%, #0d1117 42%, #13202a 100%);
   --text-color-primary: #F5F5F5;
 }
 
 [data-theme="light"] {
   --bg-primary: #F5F5F5;
+  --bg-gradient: linear-gradient(180deg, #f7f8fa 0%, #eef1f5 100%);
   --text-color-primary: #0d1117;
 }
 
@@ -68,8 +80,15 @@ html {
 
 body {
   background-color: var(--bg-primary);
+  background-image: var(--bg-gradient);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
   color: var(--text-color-primary);
+  min-height: 100vh;
+  margin: 0;
+}
 
+#root {
   max-width: 1000px;
   padding-top: 30px;
   margin: auto;
