@@ -1,15 +1,26 @@
-import { Popcorn, Search, Sparkles } from "lucide-react";
+import { Dices, Popcorn, Search, Sparkles } from "lucide-react";
 import useMoviesStore from "../../contexts/useMoviesStore";
 import { Card } from "./Card";
 
 export const Movies = () => {
   const movies = useMoviesStore((s) => s.movies);
   const isLoading = useMoviesStore((s) => s.isLoading);
+  const isRandomPicking = useMoviesStore((s) => s.isRandomPicking);
   const error = useMoviesStore((s) => s.error);
   const hasSearched = useMoviesStore((s) => s.hasSearched);
   const query = useMoviesStore((s) => s.query);
+  const setQuery = useMoviesStore((s) => s.setQuery);
+  const searchRandomPopular = useMoviesStore((s) => s.searchRandomPopular);
   const hasQuery = query.trim().length > 0;
   const showMovies = hasQuery && movies.length > 0 && hasSearched && !isLoading;
+
+  const onSuggestionClick = (suggestion) => {
+    setQuery(suggestion);
+  };
+
+  const onRandomClick = () => {
+    searchRandomPopular();
+  };
 
   const getTitle = () => {
     if (!hasQuery) return "¡Bienvenido a Movie Search!";
@@ -60,7 +71,7 @@ export const Movies = () => {
         <div className="relative z-10">
           <div className="themed-empty-pill mb-5 inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm">
             <Sparkles size={16} />
-            Descubre tu próxima película favorita
+            Busca y descubre tu próxima película favorita
           </div>
 
           <h2 className="text-3xl font-bold md:text-5xl">{getTitle()}</h2>
@@ -68,9 +79,36 @@ export const Movies = () => {
           <p className="themed-muted mt-4 max-w-2xl text-base md:text-lg">{getDescription()}</p>
 
           <div className="mt-7 flex flex-wrap gap-3 text-sm">
-            <span className="themed-empty-chip rounded-full px-4 py-2">Interstellar</span>
-            <span className="themed-empty-chip rounded-full px-4 py-2">The Dark Knight</span>
-            <span className="themed-empty-chip rounded-full px-4 py-2">Fallout</span>
+            <button
+              type="button"
+              onClick={() => onSuggestionClick("Interstellar")}
+              className="themed-empty-chip rounded-full px-4 py-2 cursor-pointer transition-transform hover:scale-105"
+            >
+              Interstellar
+            </button>
+            <button
+              type="button"
+              onClick={() => onSuggestionClick("The Dark Knight")}
+              className="themed-empty-chip rounded-full px-4 py-2 cursor-pointer transition-transform hover:scale-105"
+            >
+              The Dark Knight
+            </button>
+            <button
+              type="button"
+              onClick={() => onSuggestionClick("Fallout")}
+              className="themed-empty-chip rounded-full px-4 py-2 cursor-pointer transition-transform hover:scale-105"
+            >
+              Fallout
+            </button>
+            <button
+              type="button"
+              onClick={onRandomClick}
+              disabled={isRandomPicking}
+              className="themed-random-btn rounded-full px-4 py-2 inline-flex items-center gap-2"
+            >
+              <Dices size={16} className="random-icon" />
+              Random
+            </button>
           </div>
 
           <div className="themed-muted mt-8 flex flex-wrap items-center gap-4 text-sm">

@@ -1,6 +1,9 @@
 import { create } from "zustand";
 import { getMovieByExactTitle, getMovies } from "../services/movies";
-import { buildQueryVariants } from "../utils/queryVariants";
+import { buildQueryVariants, buildTooManyResultsVariants } from "../utils/queryVariants";
+import { getRandomPopularTitle } from "../utils/popularTitles";
+
+const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const useMoviesStore = create((set, get) => ({
   // estados
@@ -9,10 +12,36 @@ const useMoviesStore = create((set, get) => ({
   isLoading: false,
   error: null,
   hasSearched: false,
+  isRandomPicking: false,
+  randomPickedTitle: "",
 
   // acciones
   setQuery: (value) => set({ query: value, hasSearched: false, error: null }),
   setMovies: (value) => set({ movies: value, hasSearched: false, error: null }),
+  searchRandomPopular: async () => {
+    if (get().isRandomPicking) return;
+
+    const randomTitle = getRandomPopularTitle(get().query);
+
+    set({
+      isRandomPicking: true,
+      randomPickedTitle: "",
+      hasSearched: false,
+      error: null,
+    });
+
+    await wait(1800);
+    set({ randomPickedTitle: randomTitle });
+
+    await wait(1300);
+    set({
+      query: randomTitle,
+      hasSearched: false,
+      error: null,
+      isRandomPicking: false,
+      randomPickedTitle: "",
+    });
+  },
   resetSearch: () =>
     set({
       query: "",
@@ -20,6 +49,8 @@ const useMoviesStore = create((set, get) => ({
       isLoading: false,
       error: null,
       hasSearched: false,
+      isRandomPicking: false,
+      randomPickedTitle: "",
     }),
 
   // funciones
@@ -52,6 +83,27 @@ const useMoviesStore = create((set, get) => ({
         }
 
         lastError = res.Error;
+      }
+
+      if (hadTooManyResultsError) {
+        const refinedVariants = buildTooManyResultsVariants(normalizedQuery);
+
+        for (const variant of refinedVariants) {
+          const refinedRes = await getMovies(variant);
+
+          if (refinedRes.Response === "True") {
+            const exactMovie = await getMovieByExactTitle(normalizedQuery);
+            const refinedMovies = refinedRes.Search ?? [];
+
+            const moviesWithExactFirst =
+              exactMovie.Response === "True"
+                ? [exactMovie, ...refinedMovies.filter((movie) => movie.imdbID !== exactMovie.imdbID)]
+                : refinedMovies;
+
+            set({ movies: moviesWithExactFirst, isLoading: false, error: null, hasSearched: true });
+            return;
+          }
+        }
       }
 
       for (const variant of queryVariants) {

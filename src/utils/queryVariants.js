@@ -71,6 +71,38 @@ const buildSequelVariants = (value) => {
   return variants;
 };
 
+const isShortNumericSequelQuery = (value) => {
+  const normalized = normalizeText(value);
+  const match = normalized.match(/^(.*)\s(\d{1,2})$/);
+
+  if (!match) return false;
+
+  const titleWithoutSpaces = match[1].replace(/\s+/g, "");
+  return titleWithoutSpaces.length > 0 && titleWithoutSpaces.length <= 3;
+};
+
+export const buildTooManyResultsVariants = (query) => {
+  const base = query.replace(/\s+/g, " ").trim();
+  const normalized = normalizeText(base);
+
+  if (!normalized) return [];
+
+  const translated = replaceWords(normalized);
+  const words = translated.split(" ");
+  const isShortSingleWord = words.length === 1 && words[0].length <= 4;
+
+  if (!isShortSingleWord) return [];
+
+  return [
+    ...new Set([
+      `${translated} chapter two`,
+      `${translated} chapter 2`,
+      `${translated} two`,
+      `${translated} 2`,
+    ]),
+  ];
+};
+
 export const buildQueryVariants = (query) => {
   const base = query.replace(/\s+/g, " ").trim();
   const normalized = normalizeText(base);
@@ -84,15 +116,30 @@ export const buildQueryVariants = (query) => {
     ...buildSequelVariants(translatedWithWords),
   ];
 
+  const preferSequelVariantsFirst = isShortNumericSequelQuery(base);
+  const orderedVariants = preferSequelVariantsFirst
+    ? [
+        ...sequelPriorityVariants,
+        base,
+        normalized,
+        translated,
+        translatedWithWords,
+        translatedWithRoman,
+      ]
+    : [
+        base,
+        normalized,
+        translated,
+        translatedWithWords,
+        translatedWithRoman,
+        ...sequelPriorityVariants,
+      ];
+
   return [
     ...new Set([
-      ...sequelPriorityVariants,
-      translatedWithWords,
-      translatedWithRoman,
-      translated,
-      base,
+      ...orderedVariants,
     ]),
   ]
     .filter((value) => value.length > 0)
-    .slice(0, 8);
+    .slice(0, 12);
 };
