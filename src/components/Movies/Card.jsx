@@ -20,7 +20,7 @@ export const Card = ({ title, year, poster }) => {
           <div className="themed-movie-overlay absolute inset-0 opacity-0 transition-opacity duration-200 group-hover:opacity-100" />
         </>
       ) : (
-        <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-black/35 text-white/90">
+        <div className="themed-poster-fallback absolute inset-0 flex flex-col items-center justify-center gap-2">
           <ImageOff size={26} />
           <p className="text-sm font-medium">Poster no disponible</p>
         </div>

@@ -64,7 +64,7 @@ export const Movies = () => {
     </section>
   ) : (
     <section className="mt-20 flex justify-center">
-      <article className="themed-empty-card relative w-full overflow-hidden rounded-3xl p-8 shadow-[0_24px_80px_-30px_rgba(0,0,0,0.85)] backdrop-blur-sm md:p-10">
+      <article className="themed-empty-card relative w-full overflow-hidden rounded-3xl p-8 md:p-10">
         <div className="pointer-events-none absolute -left-20 -top-24 h-56 w-56 rounded-full bg-cyan-400/20 blur-3xl" />
         <div className="pointer-events-none absolute -bottom-24 -right-16 h-52 w-52 rounded-full bg-emerald-400/20 blur-3xl" />
 
