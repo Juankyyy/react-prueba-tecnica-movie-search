@@ -1,6 +1,6 @@
 // import { useEffect, useState } from "react";
 // import { getDefaultMovies } from "../../services/movies";
-import { Clapperboard, Search, Sparkles } from "lucide-react";
+import { Popcorn, Search, Sparkles } from "lucide-react";
 import useMoviesStore from "../../contexts/useMoviesStore";
 import { Card } from "./Card";
 
@@ -69,7 +69,7 @@ export const Movies = () => {
               Escribe un título en el buscador
             </div>
             <div className="inline-flex items-center gap-2">
-              <Clapperboard size={16} />
+              <Popcorn size={16} />
               Explora resultados al instante
             </div>
           </div>
