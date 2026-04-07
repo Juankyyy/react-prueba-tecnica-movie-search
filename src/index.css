@@ -43,6 +43,26 @@
   --bg-primary: #F5F5F5;
   --bg-gradient: linear-gradient(180deg, #f7f8fa 0%, #eef1f5 100%);
   --text-color-primary: #0d1117;
+  --text-color-muted: rgba(13, 17, 23, 0.78);
+  --text-color-subtle: rgba(13, 17, 23, 0.62);
+  --surface-primary: rgba(255, 255, 255, 0.72);
+  --surface-hover: rgba(255, 255, 255, 0.92);
+  --surface-border: rgba(13, 17, 23, 0.22);
+  --surface-elevated: rgba(255, 255, 255, 0.56);
+  --welcome-card-bg: rgba(255, 255, 255, 0.52);
+  --welcome-pill-bg: rgba(255, 255, 255, 0.68);
+  --welcome-chip-bg: rgba(255, 255, 255, 0.56);
+  --movie-card-border: rgba(13, 17, 23, 0.22);
+  --movie-card-shadow: 0 22px 44px -28px rgba(12, 18, 28, 0.45);
+  --movie-card-shadow-hover: 0 28px 58px -28px rgba(12, 18, 28, 0.56);
+  --movie-card-overlay: linear-gradient(
+    180deg,
+    rgba(12, 18, 28, 0.04) 20%,
+    rgba(12, 18, 28, 0.28) 52%,
+    rgba(12, 18, 28, 0.76) 100%
+  );
+  --movie-card-meta-bg: rgba(255, 255, 255, 0.78);
+  --movie-card-meta-text: #0d1117;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -54,10 +74,31 @@
       radial-gradient(980px circle at 50% 115%, rgba(34, 80, 138, 0.3), transparent 60%),
       linear-gradient(158deg, #070b11 0%, #0d1117 42%, #13202a 100%);
     --text-color-primary: #F5F5F5;
+    --text-color-muted: rgba(245, 245, 245, 0.84);
+    --text-color-subtle: rgba(245, 245, 245, 0.66);
+    --surface-primary: rgba(0, 0, 0, 0.42);
+    --surface-hover: rgba(255, 255, 255, 0.12);
+    --surface-border: rgba(255, 255, 255, 0.18);
+    --surface-elevated: rgba(0, 0, 0, 0.42);
+    --welcome-card-bg: rgba(0, 0, 0, 0.42);
+    --welcome-pill-bg: rgba(255, 255, 255, 0.08);
+    --welcome-chip-bg: rgba(255, 255, 255, 0.1);
+    --movie-card-border: rgba(255, 255, 255, 0.22);
+    --movie-card-shadow: 0 24px 54px -30px rgba(0, 0, 0, 0.9);
+    --movie-card-shadow-hover: 0 30px 70px -30px rgba(0, 0, 0, 0.98);
+    --movie-card-overlay: linear-gradient(
+      180deg,
+      rgba(4, 8, 14, 0.02) 18%,
+      rgba(4, 8, 14, 0.3) 45%,
+      rgba(4, 8, 14, 0.84) 100%
+    );
+    --movie-card-meta-bg: rgba(0, 0, 0, 0.58);
+    --movie-card-meta-text: #f5f5f5;
   }
 }
 
 [data-theme="dark"] {
+  color-scheme: dark;
   --bg-primary: #0d1117;
   --bg-gradient:
     radial-gradient(1100px circle at -8% -25%, rgba(77, 124, 184, 0.62), transparent 58%),
@@ -65,12 +106,53 @@
     radial-gradient(980px circle at 50% 115%, rgba(34, 80, 138, 0.3), transparent 60%),
     linear-gradient(158deg, #070b11 0%, #0d1117 42%, #13202a 100%);
   --text-color-primary: #F5F5F5;
+  --text-color-muted: rgba(245, 245, 245, 0.84);
+  --text-color-subtle: rgba(245, 245, 245, 0.66);
+  --surface-primary: rgba(0, 0, 0, 0.42);
+  --surface-hover: rgba(255, 255, 255, 0.12);
+  --surface-border: rgba(255, 255, 255, 0.18);
+  --surface-elevated: rgba(0, 0, 0, 0.42);
+  --welcome-card-bg: rgba(0, 0, 0, 0.42);
+  --welcome-pill-bg: rgba(255, 255, 255, 0.08);
+  --welcome-chip-bg: rgba(255, 255, 255, 0.1);
+  --movie-card-border: rgba(255, 255, 255, 0.22);
+  --movie-card-shadow: 0 24px 54px -30px rgba(0, 0, 0, 0.9);
+  --movie-card-shadow-hover: 0 30px 70px -30px rgba(0, 0, 0, 0.98);
+  --movie-card-overlay: linear-gradient(
+    180deg,
+    rgba(4, 8, 14, 0.02) 18%,
+    rgba(4, 8, 14, 0.3) 45%,
+    rgba(4, 8, 14, 0.84) 100%
+  );
+  --movie-card-meta-bg: rgba(0, 0, 0, 0.58);
+  --movie-card-meta-text: #f5f5f5;
 }
 
 [data-theme="light"] {
+  color-scheme: light;
   --bg-primary: #F5F5F5;
   --bg-gradient: linear-gradient(180deg, #f7f8fa 0%, #eef1f5 100%);
   --text-color-primary: #0d1117;
+  --text-color-muted: rgba(13, 17, 23, 0.78);
+  --text-color-subtle: rgba(13, 17, 23, 0.62);
+  --surface-primary: rgba(255, 255, 255, 0.72);
+  --surface-hover: rgba(255, 255, 255, 0.92);
+  --surface-border: rgba(13, 17, 23, 0.22);
+  --surface-elevated: rgba(255, 255, 255, 0.56);
+  --welcome-card-bg: rgba(255, 255, 255, 0.52);
+  --welcome-pill-bg: rgba(255, 255, 255, 0.68);
+  --welcome-chip-bg: rgba(255, 255, 255, 0.56);
+  --movie-card-border: rgba(13, 17, 23, 0.22);
+  --movie-card-shadow: 0 22px 44px -28px rgba(12, 18, 28, 0.45);
+  --movie-card-shadow-hover: 0 28px 58px -28px rgba(12, 18, 28, 0.56);
+  --movie-card-overlay: linear-gradient(
+    180deg,
+    rgba(12, 18, 28, 0.04) 20%,
+    rgba(12, 18, 28, 0.28) 52%,
+    rgba(12, 18, 28, 0.76) 100%
+  );
+  --movie-card-meta-bg: rgba(255, 255, 255, 0.78);
+  --movie-card-meta-text: #0d1117;
 }
 
 html {
@@ -83,13 +165,78 @@ body {
   background-image: var(--bg-gradient);
   background-attachment: fixed;
   background-repeat: no-repeat;
+  background-size: cover;
   color: var(--text-color-primary);
   min-height: 100vh;
   margin: 0;
+  transition: color 220ms ease, background-color 220ms ease;
 }
 
 #root {
   max-width: 1000px;
   padding-top: 30px;
   margin: auto;
+}
+
+.themed-control {
+  background: var(--surface-primary);
+  border: 2px solid var(--surface-border);
+  color: var(--text-color-primary);
+  transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease;
+}
+
+.themed-control:hover {
+  background: var(--surface-hover);
+}
+
+.themed-input {
+  color: var(--text-color-primary);
+}
+
+.themed-input::placeholder {
+  color: var(--text-color-subtle);
+}
+
+.themed-empty-card {
+  border: 1px solid var(--surface-border);
+  background: var(--welcome-card-bg);
+  color: var(--text-color-primary);
+}
+
+.themed-empty-pill {
+  border: 1px solid var(--surface-border);
+  background: var(--welcome-pill-bg);
+  color: var(--text-color-muted);
+}
+
+.themed-empty-chip {
+  border: 1px solid var(--surface-border);
+  background: var(--welcome-chip-bg);
+  color: var(--text-color-muted);
+}
+
+.themed-muted {
+  color: var(--text-color-muted);
+}
+
+.themed-movie-card {
+  border: 1px solid var(--movie-card-border);
+  box-shadow: var(--movie-card-shadow);
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+
+.themed-movie-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--movie-card-shadow-hover);
+}
+
+.themed-movie-overlay {
+  background-image: var(--movie-card-overlay);
+}
+
+.themed-movie-meta {
+  border: 1px solid var(--movie-card-border);
+  background: var(--movie-card-meta-bg);
+  color: var(--movie-card-meta-text);
+  backdrop-filter: blur(8px);
 }
