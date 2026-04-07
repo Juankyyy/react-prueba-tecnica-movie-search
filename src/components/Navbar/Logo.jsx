@@ -1,12 +1,18 @@
 import { Clapperboard } from "lucide-react";
+import useMoviesStore from "../../contexts/useMoviesStore";
 
 export const Logo = () => {
-  // 🧠 Logic
+  const resetSearch = useMoviesStore((s) => s.resetSearch);
 
   return (
-    <div className="themed-control flex h-navbar-items items-center gap-2 p-2 px-3 rounded-full cursor-pointer">
+    <button
+      type="button"
+      onClick={resetSearch}
+      aria-label="Volver al inicio"
+      className="themed-control flex h-navbar-items items-center gap-2 p-2 px-3 rounded-full cursor-pointer"
+    >
       <Clapperboard />
-      <h1 className="text-xl">Movie Search</h1>
-    </div>
+      <span className="text-xl">Movie Search</span>
+    </button>
   );
 };

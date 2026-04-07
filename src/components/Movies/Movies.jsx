@@ -9,7 +9,7 @@ export const Movies = () => {
   const hasSearched = useMoviesStore((s) => s.hasSearched);
   const query = useMoviesStore((s) => s.query);
   const hasQuery = query.trim().length > 0;
-  const showMovies = movies.length > 0 && hasSearched && !isLoading;
+  const showMovies = hasQuery && movies.length > 0 && hasSearched && !isLoading;
 
   const getTitle = () => {
     if (!hasQuery) return "¡Bienvenido a Movie Search!";
