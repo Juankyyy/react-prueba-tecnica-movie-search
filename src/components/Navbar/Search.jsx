@@ -14,7 +14,7 @@ export const Search = () => {
     e.preventDefault();
     console.log(query);
 
-    getMoviesByQuery(query);
+    getMoviesByQuery(query.trim());
   };
 
   return (
