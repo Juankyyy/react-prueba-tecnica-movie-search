@@ -20,13 +20,8 @@ export const getMovies = async (search) => {
 
     const data = await res.json();
 
-    console.log(data);
+    return data;
   } catch (err) {
     throw new Error("Error al buscar películas: ", err);
   }
-
-  return {
-    getMovies,
-    getDefaultMovies,
-  };
 };

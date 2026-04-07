@@ -1,21 +1,20 @@
 import { SearchIcon } from "lucide-react";
-import { getMovies } from "../../services/movies";
 import useMoviesStore from "../../contexts/useMoviesStore";
 
 export const Search = () => {
+  const getMoviesByQuery = useMoviesStore((s) => s.getMoviesByQuery);
   const query = useMoviesStore((s) => s.query);
   const setQuery = useMoviesStore((s) => s.setQuery);
 
   const onInputChange = (e) => {
     setQuery(e.target.value);
-    console.log(query)
   };
 
   const onSubmit = (e) => {
     e.preventDefault();
     console.log(query);
 
-    getMovies(query);
+    getMoviesByQuery(query);
   };
 
   return (
