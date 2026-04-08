@@ -1,8 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ImageOff } from "lucide-react";
 
 export const Card = ({ title, year, poster }) => {
   const [imageError, setImageError] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
+
+  useEffect(() => {
+    setImageError(false);
+    setImageLoaded(false);
+  }, [poster]);
 
   const hasPoster = Boolean(poster) && poster !== "N/A" && !imageError;
 
@@ -10,14 +16,29 @@ export const Card = ({ title, year, poster }) => {
     <article className="themed-movie-card group relative aspect-2/3 w-full overflow-hidden rounded-md cursor-pointer">
       {hasPoster ? (
         <>
+          {!imageLoaded && (
+            <div className="themed-poster-loading absolute inset-0 flex items-center justify-center">
+              <div className="themed-poster-shimmer" />
+              <div className="themed-poster-spinner" aria-hidden="true" />
+            </div>
+          )}
+
           <img
-            className="absolute inset-0 h-full w-full object-cover transition-transform duration-200 group-hover:scale-105"
+            className={`absolute inset-0 h-full w-full object-cover transition-all duration-300 ${
+              imageLoaded ? "opacity-100 group-hover:scale-105" : "opacity-0"
+            }`}
             src={poster}
             alt={title}
+            onLoad={() => setImageLoaded(true)}
             onError={() => setImageError(true)}
             loading="lazy"
+            decoding="async"
           />
-          <div className="themed-movie-overlay absolute inset-0 opacity-20 transition-opacity duration-200 md:opacity-0 md:group-hover:opacity-100" />
+          <div
+            className={`themed-movie-overlay absolute inset-0 transition-opacity duration-200 ${
+              imageLoaded ? "opacity-20 md:opacity-0 md:group-hover:opacity-100" : "opacity-0"
+            }`}
+          />
         </>
       ) : (
         <div className="themed-poster-fallback absolute inset-0 flex flex-col items-center justify-center gap-2">
