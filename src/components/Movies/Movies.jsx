@@ -52,7 +52,7 @@ export const Movies = () => {
   };
 
   return showMovies ? (
-    <section className="flex flex-wrap gap-5">
+    <section className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4 lg:gap-5">
       {movies.map((movie) => (
         <Card
           key={movie.imdbID}
@@ -63,40 +63,40 @@ export const Movies = () => {
       ))}
     </section>
   ) : (
-    <section className="mt-20 flex justify-center">
-      <article className="themed-empty-card relative w-full overflow-hidden rounded-3xl p-8 md:p-10">
+    <section className="mt-9 flex justify-center md:mt-20">
+      <article className="themed-empty-card relative w-full overflow-hidden rounded-3xl p-5 sm:p-7 md:p-10">
         <div className="pointer-events-none absolute -left-20 -top-24 h-56 w-56 rounded-full bg-cyan-400/20 blur-3xl" />
         <div className="pointer-events-none absolute -bottom-24 -right-16 h-52 w-52 rounded-full bg-emerald-400/20 blur-3xl" />
 
         <div className="relative z-10">
-          <div className="themed-empty-pill mb-5 inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm">
+          <div className="themed-empty-pill mb-4 inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-xs sm:mb-5 sm:px-4 sm:py-2 sm:text-sm">
             <Sparkles size={16} />
             Busca y descubre tu próxima película favorita
           </div>
 
-          <h2 className="text-3xl font-bold md:text-5xl">{getTitle()}</h2>
+          <h2 className="text-2xl font-bold sm:text-3xl md:text-5xl">{getTitle()}</h2>
 
-          <p className="themed-muted mt-4 max-w-2xl text-base md:text-lg">{getDescription()}</p>
+          <p className="themed-muted mt-4 max-w-2xl text-sm sm:text-base md:text-lg">{getDescription()}</p>
 
-          <div className="mt-7 flex flex-wrap gap-3 text-sm">
+          <div className="mt-6 flex flex-wrap gap-2 text-xs sm:mt-7 sm:gap-3 sm:text-sm">
             <button
               type="button"
               onClick={() => onSuggestionClick("Interstellar")}
-              className="themed-empty-chip rounded-full px-4 py-2 cursor-pointer transition-transform hover:scale-105"
+              className="themed-empty-chip cursor-pointer rounded-full px-3 py-2 transition-transform hover:scale-105 max-[420px]:w-full max-[420px]:justify-center sm:px-4"
             >
               Interstellar
             </button>
             <button
               type="button"
               onClick={() => onSuggestionClick("The Dark Knight")}
-              className="themed-empty-chip rounded-full px-4 py-2 cursor-pointer transition-transform hover:scale-105"
+              className="themed-empty-chip cursor-pointer rounded-full px-3 py-2 transition-transform hover:scale-105 max-[420px]:w-full max-[420px]:justify-center sm:px-4"
             >
               The Dark Knight
             </button>
             <button
               type="button"
               onClick={() => onSuggestionClick("Fallout")}
-              className="themed-empty-chip rounded-full px-4 py-2 cursor-pointer transition-transform hover:scale-105"
+              className="themed-empty-chip cursor-pointer rounded-full px-3 py-2 transition-transform hover:scale-105 max-[420px]:w-full max-[420px]:justify-center sm:px-4"
             >
               Fallout
             </button>
@@ -104,14 +104,14 @@ export const Movies = () => {
               type="button"
               onClick={onRandomClick}
               disabled={isRandomPicking}
-              className="themed-random-btn rounded-full px-4 py-2 inline-flex items-center gap-2"
+              className="themed-random-btn inline-flex items-center gap-2 rounded-full px-3 py-2 max-[420px]:w-full max-[420px]:justify-center sm:px-4"
             >
               <Dices size={16} className="random-icon" />
               Random
             </button>
           </div>
 
-          <div className="themed-muted mt-8 flex flex-wrap items-center gap-4 text-sm">
+          <div className="themed-muted mt-8 flex flex-wrap items-center gap-3 text-xs sm:gap-4 sm:text-sm">
             <div className="inline-flex items-center gap-2">
               <Search size={16} />
               Escribe un título en el buscador

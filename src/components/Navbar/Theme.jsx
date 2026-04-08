@@ -27,7 +27,7 @@ export const Theme = () => {
   };
 
   return (
-    <div className="flex items-center justify-center h-navbar-items w-navbar-items group">
+    <div className="group flex h-11 w-11 items-center justify-center md:h-navbar-items md:w-navbar-items">
       <button
         type="button"
         onClick={toggleTheme}

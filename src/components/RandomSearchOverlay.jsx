@@ -47,13 +47,34 @@ export const RandomSearchOverlay = () => {
     };
   }, [isVisible, isRandomPicking]);
 
+  useEffect(() => {
+    if (!isVisible) return;
+
+    const previousOverflow = document.body.style.overflow;
+    const previousTouchAction = document.body.style.touchAction;
+
+    document.body.style.overflow = "hidden";
+    document.body.style.touchAction = "none";
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.body.style.touchAction = previousTouchAction;
+    };
+  }, [isVisible]);
+
   if (!isVisible) return null;
 
   const hasPickedTitle = randomPickedTitle.length > 0;
   const transitionClass = !isRandomPicking ? "is-leaving" : isActive ? "is-entered" : "is-pre-enter";
 
   return (
-    <div className={`random-overlay ${transitionClass}`} role="status" aria-live="polite">
+    <div
+      className={`random-overlay ${transitionClass}`}
+      role="status"
+      aria-live="polite"
+      aria-atomic="true"
+      aria-label="Búsqueda aleatoria en progreso"
+    >
       <div className={`random-overlay-card ${transitionClass} ${hasPickedTitle ? "is-result" : ""}`}>
         <div className="random-overlay-orb" />
 

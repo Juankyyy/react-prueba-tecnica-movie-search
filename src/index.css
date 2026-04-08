@@ -36,6 +36,12 @@
   --spacing-navbar-items: 48px;
 }
 
+@media (max-width: 768px) {
+  :root {
+    --spacing-navbar-items: 44px;
+  }
+}
+
 /* Dark mode */
 :root {
   color-scheme: light dark;
@@ -282,11 +288,47 @@ body::after {
 }
 
 #root {
+  width: min(100%, 1000px);
   max-width: 1000px;
+  padding-inline: clamp(12px, 4vw, 24px);
   padding-top: 30px;
   margin: auto;
   position: relative;
   z-index: 1;
+}
+
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
+  #root {
+    padding-top: 16px;
+  }
+}
+
+@media (max-width: 420px) {
+  #root {
+    padding-inline: 10px;
+    padding-top: 12px;
+  }
+
+  .themed-empty-card {
+    border-radius: 20px;
+  }
+
+  .themed-empty-chip,
+  .themed-random-btn {
+    min-height: 38px;
+  }
+
+  .themed-control {
+    backdrop-filter: blur(6px);
+  }
+
+  .themed-random-btn:hover {
+    transform: translateY(-1px) scale(1.02);
+  }
 }
 
 .themed-control {
@@ -626,11 +668,14 @@ body::after {
   z-index: 80;
   display: grid;
   place-items: center;
+  padding: 16px;
   background: radial-gradient(60% 45% at 50% 38%, rgba(59, 130, 246, 0.28), rgba(3, 7, 18, 0.9));
   opacity: 0;
   backdrop-filter: blur(0px) saturate(0.95);
+  -webkit-backdrop-filter: blur(0px) saturate(0.95);
   transition: opacity 520ms cubic-bezier(0.19, 1, 0.22, 1), backdrop-filter 520ms ease;
   will-change: opacity, backdrop-filter;
+  overscroll-behavior: contain;
 }
 
 .random-overlay.is-pre-enter {
@@ -641,28 +686,55 @@ body::after {
 .random-overlay.is-entered {
   opacity: 1;
   backdrop-filter: blur(9px) saturate(1.08);
+  -webkit-backdrop-filter: blur(9px) saturate(1.08);
 }
 
 .random-overlay.is-leaving {
   opacity: 0;
   backdrop-filter: blur(0px) saturate(0.95);
+  -webkit-backdrop-filter: blur(0px) saturate(0.95);
 }
 
 .random-overlay-card {
   position: relative;
-  width: min(90vw, 460px);
+  width: min(92vw, 460px);
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 24px;
   padding: 28px 24px;
   text-align: center;
   background: linear-gradient(150deg, rgba(7, 12, 28, 0.95), rgba(10, 28, 62, 0.9));
   box-shadow: 0 28px 80px -32px rgba(56, 189, 248, 0.45);
+  isolation: isolate;
+  contain: layout paint style;
   opacity: 0;
   transform: translateY(34px) scale(0.92) rotateX(8deg);
   filter: blur(4px);
   transform-origin: center top;
   transition: transform 560ms cubic-bezier(0.2, 0.8, 0.2, 1), opacity 500ms ease, filter 520ms ease, box-shadow 520ms ease;
   will-change: transform, opacity, filter;
+}
+
+@media (max-width: 640px) {
+  .random-overlay-card {
+    width: min(94vw, 420px);
+    border-radius: 20px;
+    padding: 22px 16px;
+  }
+
+  .random-overlay-dice-wrap {
+    width: 72px;
+    height: 72px;
+    margin: 2px auto 12px;
+  }
+
+  .random-overlay-title {
+    font-size: 1rem;
+  }
+
+  .random-overlay-picked {
+    margin-top: 10px;
+    font-size: 0.92rem;
+  }
 }
 
 .random-overlay-card.is-pre-enter {
@@ -676,6 +748,10 @@ body::after {
   transform: translateY(0) scale(1) rotateX(0deg);
   filter: blur(0px);
   box-shadow: 0 30px 88px -34px rgba(56, 189, 248, 0.55);
+}
+
+.random-overlay-card.is-result {
+  border-color: rgba(147, 197, 253, 0.5);
 }
 
 .random-overlay-card.is-leaving {
@@ -740,17 +816,87 @@ body::after {
   position: relative;
   z-index: 2;
   margin: 12px auto 0;
-  width: fit-content;
-  max-width: 95%;
+  width: min(100%, 34ch);
   border: 1px solid rgba(255, 255, 255, 0.24);
   border-radius: 999px;
   padding: 10px 16px;
   color: rgba(248, 250, 252, 0.95);
   background: rgba(255, 255, 255, 0.08);
+  line-height: 1.25;
+  text-wrap: balance;
+  word-break: break-word;
   opacity: 0;
   transform: translateY(8px) scale(0.97);
 }
 
 .random-overlay-picked.show {
   animation: random-title-reveal 520ms ease-out forwards;
+}
+
+@media (max-width: 420px) {
+  .random-overlay {
+    padding: 10px;
+  }
+
+  .random-overlay-card {
+    width: 100%;
+    border-radius: 18px;
+    padding: 18px 14px;
+  }
+
+  .random-overlay-dice-wrap {
+    width: 64px;
+    height: 64px;
+    border-radius: 14px;
+    margin: 0 auto 10px;
+  }
+
+  .random-overlay-title {
+    font-size: 0.95rem;
+  }
+
+  .random-overlay-picked {
+    width: min(100%, 30ch);
+    margin-top: 8px;
+    padding: 8px 12px;
+    font-size: 0.84rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .random-overlay,
+  .random-overlay-card {
+    transition-duration: 220ms;
+  }
+
+  .random-overlay-orb,
+  .random-overlay-dice-wrap .random-overlay-dice,
+  .random-overlay-picked.show {
+    animation: none !important;
+  }
+
+  .random-overlay-card {
+    filter: none;
+  }
+
+  .random-overlay-card.is-pre-enter {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+
+  .random-overlay-card.is-entered {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  .random-overlay-card.is-leaving {
+    opacity: 0;
+    transform: translateY(6px) scale(0.99);
+  }
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .random-overlay {
+    background: rgba(2, 6, 23, 0.88);
+  }
 }
