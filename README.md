@@ -1,26 +1,57 @@
-## Prueba Técnica React: Buscador de Películas
+# Movie Search
 
-Crea una aplicación para buscar películas
+Aplicacion web para buscar peliculas y series usando OMDb.
 
-API a usar: - https://www.omdbapi.com/
-Consigue la API Key en la propia página web registrando tu email.
+## Objetivo
 
-Requerimientos:
+Permitir buscar titulos rapido, ver resultados en una grilla clara y mantener una experiencia visual moderna en mobile y desktop.
 
-✅ Necesita mostrar un input para buscar la película y un botón para buscar.
+## Funcionalidades
 
-✅ Lista las películas y muestra el título, año y poster.
+- Busqueda por titulo con debounce.
+- Resultados en grid responsive.
+- Modo claro/oscuro.
+- Boton random con overlay animado.
+- Loader en posters mientras cargan.
+- Manejo de posters faltantes y estados vacios.
 
-✅ Que el formulario funcione
+## Stack
 
-✅ Haz que las películas se muestren en un grid responsive.
+- React + Vite
+- Zustand para estado global
+- Tailwind CSS (v4) + CSS custom
+- Lucide React para iconos
+- OMDb API para datos
 
-✅ Hacer el fetching de datos a la API
+## Ejecutar en local
 
-Primera iteración:
+```bash
+npm install
+npm run dev
+```
 
-✅ Evitar que se haga la misma búsqueda dos veces seguidas.
+## Scripts
 
-✅ Haz que la búsqueda se haga automáticamente al escribir.
+```bash
+npm run dev      # desarrollo
+npm run build    # build produccion
+npm run preview  # previsualizar build
+npm run lint     # revisar codigo
+```
 
-✅ Evita que se haga la búsqueda continuamente al escribir (debounce)
+## Build
+
+```bash
+npm run build
+```
+
+## Estructura base
+
+- src/components: UI (Navbar, Movies, cards, overlay)
+- src/contexts: store principal con Zustand
+- src/services: llamadas a OMDb
+- src/utils: helpers de variantes y titulos random
+
+## Nota
+
+Este proyecto esta orientado a una prueba tecnica y prioriza simplicidad, claridad visual y buena experiencia de uso.
